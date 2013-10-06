@@ -1,11 +1,13 @@
 data ArvBin a = Null
      | No a (ArvBin a) (ArvBin a)
 
+
 somaA Null = 0
 somaA (No x esq dir) = x + (somaA esq) + (somaA dir)
 
-multiplicaA Null = 0
-multiplicaA (No x esq dir) = x * (somaA esq) * (somaA dir)
+
+multiplicaA Null = 1
+multiplicaA (No x esq dir) = x * (multiplicaA esq) * (multiplicaA dir)
 
 elementoPreordem Null = []
 elementoPreordem (No x esq dir) = [x] ++ (elementoPreordem esq) ++ (elementoPreordem dir)
