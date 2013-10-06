@@ -1,5 +1,19 @@
+module Arvo (
+elementoPreordem,
+elementoOrdem,
+elementoPosordem,
+verificaAltura,
+balanciada,
+somaA,
+multiplicaA,
+busca,
+insere) where
+
 data ArvBin a = Null
      | No a (ArvBin a) (ArvBin a)
+
+imprime Null = "_"
+imprime (No x esq dir) = "{" ++ show x ++ ":" ++ imprime esq ++ "|" ++ imprime dir ++ "}"
 
 
 elementoPreordem :: ArvBin a -> [a]
@@ -31,11 +45,11 @@ multiplicaA Null = 1
 multiplicaA (No x esq dir) = x * (multiplicaA esq) * (multiplicaA dir)
 
 
+busca f (No x esq dir) = f `elem` (elementoPreordem (No x esq dir))
+
+insere x Null = (No x Null Null)
+insere x (No y esq dir)| x == y = No y esq dir| x < y = No y (insere x esq) dir| otherwise = No y esq (insere x dir)
 
 arvg = (No 10 (No 5 (No 2 Null Null)(No 7 Null Null))(No 15 (No 14 Null Null)(No 19 Null Null)))
 
 arvb = (No 2 (No 1 Null Null) (No 3 Null Null))
-
-
-
-busca f (No x esq dir) = f `elem` (elementoPreordem (No x esq dir))
